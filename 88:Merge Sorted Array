@@ -1,3 +1,11 @@
+Let's initialize two pointers, i and j, both starting at the end of their respective arrays (m-1 for nums1 and n-1 for nums2).
+Additionally, set a pointer k to m+n-1, indicating the position in nums1 where we'll insert the larger element. 
+Now, iterate from the end of arrays i and j, comparing the elements at these positions. Place the larger element in nums1 at position k, and decrement either pointer i or j accordingly. 
+Continue this process until all elements in nums2 are iterated through.
+If there are remaining elements in nums1, no further action is needed as they are already in their correct positions.
+
+
+
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int i =m-1;

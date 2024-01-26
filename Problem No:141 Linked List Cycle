@@ -1,0 +1,24 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        // Initialize two pointers, slowPtr and fastPtr, both starting at the head of the list.
+        ListNode slowPtr = head;
+        ListNode fastPtr = head;
+
+        // Iterate through the list until one of the pointers reaches the end (null) or a cycle is detected.
+        while (slowPtr != null && fastPtr != null && fastPtr.next != null) {
+            // Move slowPtr one step at a time.
+            slowPtr = slowPtr.next;
+
+            // Move fastPtr two steps at a time.
+            fastPtr = fastPtr.next.next;
+
+            // If the pointers meet, there is a cycle, so return true.
+            if (slowPtr == fastPtr) {
+                return true;
+            }
+        }
+
+        // If the loop completes without finding a cycle, return false.
+        return false;
+    }
+}

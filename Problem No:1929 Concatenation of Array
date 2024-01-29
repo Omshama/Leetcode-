@@ -1,0 +1,22 @@
+public class ArrayConcatenator {
+    /**
+     * Concatenates the given array with itself.
+     *
+     * @param nums The input array to be concatenated.
+     * @return An array containing the concatenation of the input array with itself.
+     */
+    public int[] getConcatenation(int[] nums) {
+        // Create a new array with double the length of the input array
+        int[] concatenatedArray = new int[nums.length * 2];
+
+        // Iterate through each element of the input array
+        for (int i = 0; i < nums.length; i++) {
+            // Copy each element of the input array into two corresponding positions in the concatenated array
+            concatenatedArray[i] = nums[i]; // Copying the current element to the first half of the concatenated array
+            concatenatedArray[i + nums.length] = nums[i]; // Copying the current element to the second half of the concatenated array
+        }
+
+        // Return the concatenated array
+        return concatenatedArray;
+    }
+}

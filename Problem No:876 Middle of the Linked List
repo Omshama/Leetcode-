@@ -1,0 +1,32 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    /**
+     * Finds the middle node of a singly-linked list.
+     * 
+     * @param head The head of the linked list.
+     * @return The middle node of the linked list.
+     */
+    public ListNode middleNode(ListNode head) {
+        // Initialize two pointers, slowPtr and fastPtr, both pointing to the head of the list
+        ListNode slowPtr = head;
+        ListNode fastPtr = head;
+        
+        // Traverse the list using two pointers: slowPtr moves one step at a time, fastPtr moves two steps at a time
+        while (fastPtr != null && fastPtr.next != null) {
+            slowPtr = slowPtr.next;  // Move slow pointer one step forward
+            fastPtr = fastPtr.next.next;  // Move fast pointer two steps forward
+        }
+        
+        // At the end of the loop, slowPtr points to the middle node of the list
+        return slowPtr;
+    }
+}

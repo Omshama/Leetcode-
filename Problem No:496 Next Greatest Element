@@ -1,0 +1,38 @@
+
+
+public class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        // If either nums1 or nums2 is empty, return an empty array
+        if (nums2.length == 0 || nums1.length == 0)
+            return new int[0];
+
+        // Map to store the next greater element for each number in nums2
+        Map<Integer, Integer> numberNGE = new HashMap<>();
+        // Stack to track numbers in descending order
+        Stack<Integer> numStack = new Stack<>();
+
+        // Traverse nums2 from right to left
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            // For each number, find its next greater element and store it in the map
+            while (!numStack.isEmpty() && numStack.peek() <= nums2[i])
+                numStack.pop();
+            
+            // If there's no greater element, store -1
+            if (numStack.isEmpty())
+                numberNGE.put(nums2[i], -1);
+            else
+                numberNGE.put(nums2[i], numStack.peek());
+            
+            // Push the current number into the stack
+            numStack.push(nums2[i]);
+        }
+
+        // Create an array to store the next greater elements for nums1
+        int[] result = new int[nums1.length];
+        // Traverse nums1 and fetch the next greater element from the map
+        for (int i = 0; i < nums1.length; i++)
+            result[i] = numberNGE.get(nums1[i]);
+
+        return result;
+    }
+}

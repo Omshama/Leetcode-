@@ -1,0 +1,29 @@
+public class Solution {
+    // Method to search for the target element in a sorted array or return the index where it should be inserted
+    public int searchInsert(int[] nums, int target) {
+        // Initialize low and high pointers for binary search
+        int low = 0;
+        int high = nums.length - 1;
+
+        // Binary search loop
+        while (low <= high) {
+            // Calculate the middle index
+            int mid = low + (high - low) / 2;
+            
+            // If the middle element is equal to the target, return its index
+            if (nums[mid] == target) {
+                return mid;
+            } 
+            // If the middle element is greater than the target, update the high pointer
+            else if (nums[mid] > target) {
+                high = mid - 1;
+            } 
+            // If the middle element is less than the target, update the low pointer
+            else {
+                low = mid + 1;
+            }
+        }
+        // If the target is not found, return the index where it should be inserted
+        return low;
+    }
+}

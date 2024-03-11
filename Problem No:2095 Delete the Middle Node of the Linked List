@@ -1,0 +1,62 @@
+/**
+ * Definition for singly-linked list.
+ */
+public class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {}
+
+    ListNode(int val) {
+        this.val = val;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+/**
+ * Solution class containing method to delete middle node of a singly-linked list.
+ */
+class Solution {
+    /**
+     * Deletes the middle node of a singly-linked list.
+     *
+     * @param head The head of the linked list.
+     * @return The head of the modified linked list after deletion.
+     */
+    public ListNode deleteMiddle(ListNode head) {
+        // Handle case where there is only one element
+        if (head.next == null) {
+            return null;
+        }
+        // Handle case where there are only two elements
+        if (head.next.next == null) {
+            head.next = null;
+            return head;
+        }
+
+        // Initialize slow and fast pointers
+        ListNode slowP = head;
+        ListNode fastP = head.next;
+        boolean skip = true;
+
+        // Traverse the list with fast pointer
+        while (fastP.next != null) {
+            if (!skip) {
+                slowP = slowP.next;
+                skip = true;
+            } else {
+                skip = false;
+            }
+            fastP = fastP.next;
+        }
+
+        // Delete the middle node
+        slowP.next = slowP.next.next;
+
+        return head;
+    }
+}

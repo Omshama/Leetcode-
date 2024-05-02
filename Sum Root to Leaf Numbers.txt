@@ -1,0 +1,28 @@
+public class Solution {
+    int total; // Variable to store the total sum
+    
+    // Method to calculate the sum of numbers formed by paths from the root to leaf nodes
+    public int sumNumbers(TreeNode root) {
+        total = 0; // Initialize total sum
+        helper(root, 0); // Call the helper method with initial sum as 0
+        return total; // Return the total sum
+    }
+    
+    // Recursive helper method to traverse the tree and calculate sum
+    void helper(TreeNode root, int sum) {
+        if (root == null) return; // Base case: if the current node is null, return
+        
+        // Update the sum by adding the current node's value
+        sum = sum * 10 + root.val;
+        
+        // If the current node is a leaf node, add the sum to the total
+        if (root.left == null && root.right == null) {
+            total += sum;
+            return; // Return to avoid further recursion
+        }
+        
+        // Recursively call the helper method for left and right children
+        helper(root.left, sum);
+        helper(root.right, sum);
+    }
+}

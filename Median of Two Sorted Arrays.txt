@@ -1,0 +1,40 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // Get the lengths of the input arrays nums1 and nums2
+        int n = nums1.length;
+        int m = nums2.length;
+        // Initialize variables for array indices and median values
+        int i = 0, j = 0, m1 = 0, m2 = 0;
+
+        // Iterate through the combined arrays up to the median
+        for (int count = 0; count <= (n + m) / 2; count++) {
+            // Save the previous median value in m2
+            m2 = m1;
+            // Check if both arrays still have elements to compare
+            if (i != n && j != m) {
+                // Compare elements from both arrays and update m1 accordingly
+                if (nums1[i] > nums2[j]) {
+                    m1 = nums2[j++];
+                } else {
+                    m1 = nums1[i++];
+                }
+            } else if (i < n) {
+                // If nums2 is exhausted, continue with nums1
+                m1 = nums1[i++];
+            } else {
+                // If nums1 is exhausted, continue with nums2
+                m1 = nums2[j++];
+            }
+        }
+
+        // Check if the total number of elements in the combined arrays is odd or even
+        if ((n + m) % 2 == 1) {
+            // If odd, return the single median value
+            return (double) m1;
+        } else {
+            // If even, return the average of the two median values
+            double ans = (double) (m1 + m2);
+            return ans / 2.0;
+        }
+    }
+}

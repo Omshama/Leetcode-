@@ -1,0 +1,36 @@
+class Solution {
+    // Method to add a new row of nodes with value 'v' at depth 'd' in the binary tree
+    public TreeNode addOneRow(TreeNode root, int v, int d) {
+        // If the depth is 1, insert a new node as the root and return the modified tree
+        if (d == 1) {
+            TreeNode node = new TreeNode(v);
+            node.left = root;
+            return node;
+        }
+        // Otherwise, recursively insert the new nodes at the specified depth
+        insert(root, v, d, 1);
+        // Return the root of the modified tree
+        return root;
+    }
+    
+    // Helper method to recursively insert new nodes at the specified depth
+    public void insert(TreeNode node, int val, int depth, int currentDepth) {
+        // Base case: if the current node is null, return
+        if (node == null) return;
+        
+        // If the current depth matches the specified depth minus one (since we're counting from 1)
+        if (depth - 1 == currentDepth) {
+            // Insert new nodes with value 'val' as left and right children of the current node
+            TreeNode t = node.left;
+            node.left = new TreeNode(val);
+            node.left.left = t;
+            t = node.right;
+            node.right = new TreeNode(val);
+            node.right.right = t;
+        } else {
+            // Recursively call insert on the left and right subtrees with incremented depth
+            insert(node.left, val, depth, currentDepth + 1);
+            insert(node.right, val, depth, currentDepth + 1);
+        }
+    }
+}

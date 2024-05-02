@@ -1,0 +1,57 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        char[] newStr = new char[2 * n + 1]; // Create a new character array to hold the modified string
+        int i = 0;
+        newStr[i++] = '#'; // Insert a special character '#' at the beginning of the string and between each pair of characters
+        
+        // Loop through the original string and insert '#' between each character
+        for (char c : s.toCharArray()) {
+            newStr[i++] = c;
+            newStr[i++] = '#';
+        }
+        
+        int p[] = new int[2 * n + 1]; // Create an array to store the length of the palindrome centered at each index
+        int center = 0, right = 0; // Initialize variables to keep track of the center and right boundary of the current palindrome
+        
+        int longestLength = 0, longestCenter = 0; // Variables to store the length and center index of the longest palindrome found so far
+        
+        // Manacher's algorithm
+        for (i = 0; i < newStr.length; i++) {
+            int mirror = 2 * center - i; // Calculate the mirror index of i based on the current center
+            
+            if (right > i) {
+                // If i is within the current palindrome, initialize p[i] using its mirror value and adjust if necessary
+                p[i] = Math.min(p[mirror], right - i);
+            }
+            
+            // Expand around the current index to find the length of the palindrome centered at i
+            int a = i + (p[i] + 1);
+            int b = i - (p[i] + 1);
+            while (b >= 0 && a < newStr.length && newStr[a] == newStr[b]) {
+                b--;
+                a++;
+                p[i]++;
+            }
+            
+            // Update longest palindrome variables if the palindrome centered at i is longer
+            if (p[i] >= longestLength) {
+                longestCenter = i;
+                longestLength = p[i];
+            }
+            
+            // Update center and right boundary if the palindrome centered at i expands beyond the current boundary
+            if (i + p[i] > right) {
+                center = i;
+                right = i + p[i];
+            }
+        }
+
+//Manacher's algorithm is an efficient way to find the longest palindromic substring in a given string. 
+//It works by exploiting the properties of palindromes to avoid redundant computations.
+        
+        // Convert the palindrome substring back to the original string format and return it
+        String st = new String(newStr);
+        return st.substring(longestCenter - longestLength, longestCenter + longestLength).replace("#", "");
+    }
+}

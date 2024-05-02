@@ -1,0 +1,38 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        int rows = grid.length;
+        if (rows == 0) {
+            // If grid is empty, return 0 islands
+            return 0;
+        }
+        int cols = grid[0].length;
+        int noOfIslands = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                // If current cell is part of an island ('1'), mark the island and increment the count
+                if (grid[i][j] == '1') {
+                    markCurrentIsland(grid, i, j, rows, cols);
+                    noOfIslands += 1;
+                }
+            }
+        }
+        // Return the total count of islands
+        return noOfIslands;
+    }
+
+    // Helper function to mark the current island
+    void markCurrentIsland(char[][] matrix, int x, int y, int r, int c) {
+        // Base case: if current cell is out of bounds or not part of the island, return
+        if (x < 0 || x >= r || y < 0 || y >= c || matrix[x][y] != '1')
+            return;
+
+        // Mark visited land as '2'
+        matrix[x][y] = '2';
+
+        // Recursively explore in 4 adjacent directions
+        markCurrentIsland(matrix, x + 1, y, r, c); // DOWN
+        markCurrentIsland(matrix, x, y + 1, r, c); // RIGHT
+        markCurrentIsland(matrix, x - 1, y, r, c); // UP
+        markCurrentIsland(matrix, x, y - 1, r, c); // LEFT
+    }
+}

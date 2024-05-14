@@ -1,0 +1,29 @@
+class Solution {
+
+    // Method to calculate the maximum area of water trapped between vertical lines
+    public int maxArea(int[] height) {
+        int left = 0; // Initialize left pointer at the beginning of the array
+        int right = height.length - 1; // Initialize right pointer at the end of the array
+        int maxArea = 0; // Initialize variable to store the maximum area
+
+        // Loop until the left pointer is less than the right pointer
+        while (left < right) {
+            // Calculate the current area using the minimum height between the two pointers
+            // multiplied by the distance between them
+            int area = Math.min(height[left], height[right]) * (right - left);
+
+            // Update maxArea with the maximum of the current area and the previous maxArea
+            maxArea = Math.max(area, maxArea);
+
+            // Move the pointer with the smaller height inward to potentially find a larger area
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        // Return the maximum area found
+        return maxArea;
+    }
+}

@@ -1,0 +1,18 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        // Initialize the index to track the position of the next unique element
+        int i = 2;
+        
+        // Iterate over the array starting from the third element
+        for(int j = 2; j < nums.length; j++) {
+            // Check if the current element is different from the element two positions before
+            if(nums[j] != nums[i - 2]) {
+                // If it's different, place the current element at the current unique index
+                nums[i++] = nums[j];
+            }
+        }
+        
+        // Return the length of the array with duplicates removed
+        return i;
+    }
+}

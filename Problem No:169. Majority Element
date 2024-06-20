@@ -1,0 +1,26 @@
+// the approach we have used is Moore Voting Algorithm 
+class Solution {
+    public int majorityElement(int[] nums) {
+        // Initialize the candidate and count
+        int cand = 0; // Variable to hold the candidate for the majority element
+        int count = 0; // Variable to keep track of the count of the current candidate
+        
+        // Iterate through each element in the array
+        for (int i = 0; i < nums.length; i++) {
+            // If count is 0, we need to select a new candidate
+            if (count == 0) {
+                cand = nums[i]; // Set the current element as the candidate
+            }
+            // If the current element is the same as the candidate, increase the count
+            if (cand == nums[i]) {
+                count++; // Increment the count since we found an occurrence of the candidate
+            } 
+            // If the current element is different from the candidate, decrease the count
+            else {
+                count--; // Decrement the count since the current element is different
+            }
+        }
+        // After traversing the array, the candidate should be the majority element
+        return cand; // Return the candidate as the majority element
+    }
+}

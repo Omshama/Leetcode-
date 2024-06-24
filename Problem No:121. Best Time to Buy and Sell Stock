@@ -1,0 +1,23 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        // Initialize the buy price with the first element of the prices array
+        int buy_price = prices[0];
+        // Initialize profit to 0
+        int profit = 0;
+
+        // Loop through the prices array starting from the second element
+        for(int i = 1; i < prices.length; i++) {
+            // If the current price is less than the buy price, update buy price
+            if(prices[i] < buy_price) {
+                buy_price = prices[i];
+            } else {
+                // Calculate the current profit if the stock were sold today
+                int current_profit = prices[i] - buy_price;
+                // Update profit if the current profit is higher than the previously recorded profit
+                profit = Math.max(current_profit, profit);
+            }
+        }
+        // Return the maximum profit
+        return profit;
+    }
+}

@@ -1,0 +1,22 @@
+class Solution {
+    // This function calculates the maximum profit that can be achieved from buying
+    // and selling stock given an array of prices where prices[i] is the price of
+    // a given stock on the i-th day.
+    public int maxProfit(int[] prices) {
+        int profit = 0; // Initialize the profit to 0
+
+        // Loop through the prices array starting from the second element
+        for (int i = 1; i < prices.length; i++) {
+            // If the current price is higher than the previous day's price,
+            // it means a profit can be made by buying the stock on the previous day
+            // and selling it on the current day.
+            if (prices[i] > prices[i-1]) {
+                // Add the difference (profit) to the total profit
+                profit += (prices[i] - prices[i-1]);
+            }
+        }
+
+        // Return the total profit
+        return profit;
+    }
+}

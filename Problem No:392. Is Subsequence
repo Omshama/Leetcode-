@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        // If the string 's' is empty, it's trivially a subsequence of 't'
+        if (s.length() == 0) {
+            return true;
+        }
+
+        // Initialize pointers for both strings
+        int i = 0;
+        int j = 0;
+
+        // Traverse both strings with the pointers
+        while (i < s.length() && j < t.length()) {
+            // If characters match, move the pointer of 's'
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            // Always move the pointer of 't'
+            j++;
+        }
+
+        // If we've matched all characters of 's', then it's a subsequence of 't'
+        if (i == s.length()) {
+            return true;
+        }
+
+        // If not all characters of 's' are matched, return false
+        return false;
+    }
+}

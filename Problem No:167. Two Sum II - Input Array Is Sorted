@@ -1,0 +1,36 @@
+class Solution {
+    /**
+     * This method finds two numbers in a sorted array that add up to a specific target.
+     * It uses a two-pointer approach to efficiently find the solution.
+     * 
+     * @param numbers The input array of integers sorted in non-decreasing order.
+     * @param target The target sum that we need to find.
+     * @return An array of two integers representing the 1-based indices of the two numbers that add up to the target.
+     *         Returns an empty array if no such pair is found.
+     */
+    public int[] twoSum(int[] numbers, int target) {
+        // Initialize two pointers: one at the start of the array, and one at the end
+        int i = 0;
+        int j = numbers.length - 1;
+
+        // Iterate while the two pointers do not cross each other
+        while (i < j) {
+            // Calculate the sum of the two current elements
+            int sum = numbers[i] + numbers[j];
+
+            // If the sum is greater than the target, move the end pointer to the left
+            if (sum > target) {
+                j--;
+            // If the sum is less than the target, move the start pointer to the right
+            } else if (sum < target) {
+                i++;
+            // If the sum equals the target, return the 1-based indices
+            } else {
+                return new int[]{i + 1, j + 1};
+            }
+        }
+
+        // Return an empty array if no pair is found
+        return new int[]{};
+    }
+}

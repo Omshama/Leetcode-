@@ -1,0 +1,21 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        // Create an array to store the count of each character in the magazine
+        int[] magazineCount = new int[26];
+
+        // Count the frequency of each character in the magazine
+        for (char c : magazine.toCharArray()) {
+            magazineCount[c - 'a']++;
+        }
+
+        // Check if each character in the ransomNote can be constructed from the magazine
+        for (char c : ransomNote.toCharArray()) {
+            if (magazineCount[c - 'a'] == 0) {
+                return false;
+            }
+            magazineCount[c - 'a']--;
+        }
+
+        return true;
+    }
+}

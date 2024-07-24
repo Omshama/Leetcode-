@@ -1,28 +1,35 @@
+
 class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode p1 = list1;
-        ListNode p2 = list2;
-        
-        // Dummy node to start the merged list
-        ListNode dummy = new ListNode();
-        ListNode current = dummy;
-        
-        // Merge the lists while both pointers are not null
-        while (p1 != null && p2 != null) {
-            if (p1.val < p2.val) {
-                current.next = p1;
-                p1 = p1.next;
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // Create a dummy node to serve as the starting point
+        ListNode dummy = new ListNode(0);
+        // This will be used to build the new list
+        ListNode curr = dummy;
+
+        // Traverse both lists while neither is empty
+        while (l1 != null && l2 != null) {
+            // Compare the current nodes of both lists
+            if (l1.val <= l2.val) {
+                // If l1's value is smaller, append it to the result and move l1 to the next node
+                curr.next = l1;
+                l1 = l1.next;
             } else {
-                current.next = p2;
-                p2 = p2.next;
+                // If l2's value is smaller, append it to the result and move l2 to the next node
+                curr.next = l2;
+                l2 = l2.next;
             }
-            current = current.next;
+            // Move the current pointer to the newly added node
+            curr = curr.next;
         }
-        
-        // Append remaining nodes of list1 or list2
-        current.next = (p1 != null) ? p1 : p2;
-        
-        // Return the merged list, excluding the dummy node
+
+        // Append the remaining nodes of l1 or l2 to the result
+        if (l1 != null) {
+            curr.next = l1;
+        } else {
+            curr.next = l2;
+        }
+
+        // The merged list is next to the dummy node
         return dummy.next;
     }
 }

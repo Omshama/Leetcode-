@@ -1,0 +1,30 @@
+class Solution {
+    // This function performs a binary search to find the index where a target should be inserted in a sorted array.
+    public int searchInsert(int[] nums, int target) {
+        // Initialize the low and high pointers for binary search.
+        int low = 0;
+        int high = nums.length - 1;
+
+        // Perform the binary search within the range [low, high].
+        while (low <= high) {
+            // Calculate the middle index to avoid overflow.
+            int mid = low + (high - low) / 2;
+
+            // Check if the middle element is the target.
+            if (nums[mid] == target) {
+                return mid; // Target found, return the index.
+            } 
+            // If the middle element is greater than the target, search the left half.
+            else if (nums[mid] > target) {
+                high = mid - 1;
+            } 
+            // If the middle element is less than the target, search the right half.
+            else {
+                low = mid + 1;
+            }
+        }
+
+        // If the target is not found, return the index where it should be inserted.
+        return low;
+    }
+}

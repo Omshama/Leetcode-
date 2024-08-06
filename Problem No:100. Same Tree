@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+    /**
+     * Checks if two binary trees are the same.
+     * @param p the root of the first tree
+     * @param q the root of the second tree
+     * @return true if the trees are the same, false otherwise
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        // Create a queue to perform a level-order traversal
+        Queue<TreeNode> queue = new LinkedList<>();
+        // Add both root nodes to the queue
+        queue.add(p);
+        queue.add(q);
+
+        // Loop until the queue is empty
+        while (!queue.isEmpty()) {
+            // Remove two nodes from the front of the queue
+            TreeNode first = queue.poll();
+            TreeNode second = queue.poll();
+
+            // If both nodes are null, continue to the next pair of nodes
+            if (first == null && second == null) {
+                continue;
+            }
+            // If one node is null or their values are different, the trees are not the same
+            else if (first == null || second == null || first.val != second.val) {
+                return false;
+            }
+
+            // Add the left children of both nodes to the queue
+            queue.add(first.left);
+            queue.add(second.left);
+            // Add the right children of both nodes to the queue
+            queue.add(first.right);
+            queue.add(second.right);
+        }
+        // If we finish the loop without finding differences, the trees are the same
+        return true;
+    }
+}

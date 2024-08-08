@@ -1,0 +1,31 @@
+class Solution {
+    public int romanToInt(String s) {
+        // Create a map to store the Roman numeral values
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        // Initialize the result with the value of the last character in the string
+        int result = map.get(s.charAt(s.length() - 1));
+
+        // Loop through the string from the second last character to the first character
+        for (int i = s.length() - 2; i >= 0; i--) {
+            // If the current character's value is less than the next character's value
+            if (map.get(s.charAt(i)) < map.get(s.charAt(i + 1))) {
+                // Subtract the current character's value from the result
+                result -= map.get(s.charAt(i));
+            } else {
+                // Otherwise, add the current character's value to the result
+                result += map.get(s.charAt(i));
+            }
+        }
+
+        // Return the final result
+        return result;
+    }
+}

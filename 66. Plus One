@@ -1,0 +1,35 @@
+class Solution {
+
+    /**
+     * Adds 1 to the integer represented by the input array of digits.
+     * Each element in the array represents a single digit of the number.
+     *
+     * @param digits an array of integers representing the digits of a number
+     * @return an array of integers representing the number after adding 1
+     */
+    public int[] plusOne(int[] digits) {
+
+        // Iterate over the digits array from the last element to the first
+        for (int i = digits.length - 1; i >= 0; i--) {
+
+            // If the current digit is less than 9, simply increment it by 1
+            if (digits[i] < 9) {
+                digits[i]++;  // Increase the digit
+                return digits; // Return the modified digits array
+            }
+
+            // If the current digit is 9, set it to 0 (carry over)
+            digits[i] = 0;
+        }
+
+        // If the loop completes, it means all digits were 9 (e.g., 999 -> 1000)
+        // Create a new array with an additional digit to store the carry over
+        digits = new int[digits.length + 1];
+
+        // Set the first digit to 1 (since 999 -> 1000)
+        digits[0] = 1;
+
+        // Return the new array
+        return digits;
+    }
+}

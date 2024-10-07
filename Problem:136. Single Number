@@ -1,0 +1,17 @@
+class Solution {
+    // Method to find the single number in an array where every other number appears twice
+    public int singleNumber(int[] nums) {
+        int single = 0;  // Initialize 'single' to 0. XOR with 0 leaves the number unchanged.
+        
+        // Loop through each element in the array
+        for (int i = 0; i < nums.length; i++) {
+            // XOR each element with 'single'. 
+            // XOR has the property that a ^ a = 0 and a ^ 0 = a. 
+            // Thus, all duplicate numbers will cancel out, leaving the unique number.
+            single ^= nums[i];  
+        }
+        
+        // Return the number that appears only once in the array
+        return single;
+    }
+}

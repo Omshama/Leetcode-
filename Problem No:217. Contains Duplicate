@@ -1,0 +1,20 @@
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+
+        // Create a HashSet to store the unique integers
+        Set<Integer> intSet = new HashSet<>();
+        
+        // Iterate through each number in the array
+        for (int num : nums) {
+            if (intSet.contains(num)) {
+                // If the number already exists in the set, a duplicate is found
+                return true;
+            }
+            // Add the number to the set
+            intSet.add(num);
+        }
+        
+        // If no duplicates are found, return false
+        return false;
+    }
+}

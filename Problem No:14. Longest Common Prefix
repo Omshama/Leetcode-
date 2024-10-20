@@ -1,0 +1,30 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+
+        // Created a StringBuilder object to store the result string, 
+        // which will hold the longest common prefix of the input array
+        StringBuilder result = new StringBuilder();
+
+        // Sorting the array of strings lexicographically to make comparison easier
+        // After sorting, the common prefix will be shared between the first and last string
+        Array.sort(strs);
+
+        // Converting the first and last strings (after sorting) to character arrays
+        // This will allow us to compare character by character
+        char[] first = strs[0].toCharArray();
+        char[] last = strs[strs.length - 1].toCharArray();
+
+        // Looping through the characters of the first string
+        for (int i = 0; i < first.length; i++) {
+            // If the characters don't match, break out of the loop (no more common prefix)
+            if (first[i] != last[i]) {
+                break;
+            }
+            // If characters match, append the character to the result string
+            result.append(first[i]);
+        }
+
+        // Convert the StringBuilder object to a string and return it as the final result
+        return result.toString();
+    }
+}

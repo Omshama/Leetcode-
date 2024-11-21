@@ -1,0 +1,50 @@
+class Solution {
+    /**
+     * This method converts a given integer (columnNumber) to its corresponding
+     * column title as it appears in an Excel sheet.
+     * 
+     * Example: 
+     * 1 -> A
+     * 28 -> AB
+     * 701 -> ZY
+     * 
+     * @param columnNumber - the Excel column number (1-based index)
+     * @return - the corresponding column title (e.g., "AB")
+     */
+    public String convertToTitle(int columnNumber) {
+        // Use StringBuilder to construct the result as it is more efficient for string manipulations
+        StringBuilder result = new StringBuilder();
+
+        // Process until the columnNumber becomes 0
+        while (columnNumber > 0) {
+            // Adjust columnNumber to 0-based indexing for easier computation
+            columnNumber--;
+
+            // Find the remainder when dividing by 26
+            // This corresponds to the position of the current letter in the column title
+            int remainder = columnNumber % 26;
+
+            // Convert the remainder into a letter (A-Z)
+            char letter = (char) (remainder + 'A');
+
+            // Append the letter to the result (we'll reverse later)
+            result.append(letter);
+
+            // Move to the next "digit" in base-26 by dividing the columnNumber by 26
+            columnNumber /= 26;
+        }
+
+        // The result is constructed in reverse order, so reverse it before returning
+        return result.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Test cases
+        System.out.println(solution.convertToTitle(1));    // Output: A
+        System.out.println(solution.convertToTitle(28));   // Output: AB
+        System.out.println(solution.convertToTitle(701));  // Output: ZY
+        System.out.println(solution.convertToTitle(2147483647)); // Output: FXSHRXW
+    }
+}

@@ -1,0 +1,44 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val; // Value of the current node
+ *     ListNode next; // Reference to the next node in the list
+ *     ListNode(int x) { // Constructor to initialize a node with a value
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+/**
+ * Solution class to find the intersection of two singly linked lists.
+ */
+public class Solution {
+
+    /**
+     * This method finds the intersection node of two singly linked lists.
+     * If the two linked lists do not intersect, it returns null.
+     *
+     * @param headA The head node of the first linked list.
+     * @param headB The head node of the second linked list.
+     * @return The intersection node or null if no intersection exists.
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        // Use two pointers, one for each linked list
+        ListNode t1 = headA, t2 = headB;
+
+        // Traverse both lists until the two pointers meet or reach the end
+        while (t1 != t2) {
+            // If t1 reaches the end of list A, switch to list B
+            // This compensates for the difference in list lengths
+            t1 = (t1 == null) ? headB : t1.next;
+
+            // If t2 reaches the end of list B, switch to list A
+            // This ensures both pointers traverse the same number of nodes
+            t2 = (t2 == null) ? headA : t2.next;
+        }
+
+        // When t1 == t2, we have found the intersection node (or null if no intersection)
+        return t1;
+    }
+}

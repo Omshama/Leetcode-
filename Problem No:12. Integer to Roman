@@ -1,0 +1,37 @@
+/**
+ * Class Solution
+ * This class provides a method to convert an integer to its Roman numeral representation.
+ */
+class Solution {
+
+    /**
+     * Converts an integer to a Roman numeral.
+     *
+     * @param num The integer to be converted (1 <= num <= 3999).
+     * @return A string representing the Roman numeral equivalent of the given integer.
+     */
+    public String intToRoman(int num) {
+        // Define the integer values of Roman numerals in descending order
+        int[] intCode = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        
+        // Define the corresponding Roman numeral strings
+        String[] stringCode = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        // Initialize a StringBuilder to construct the Roman numeral
+        StringBuilder ans = new StringBuilder();
+
+        // Iterate over the Roman numeral values and their corresponding strings
+        for (int i = 0; i < intCode.length; i++) {
+            // While the current integer value can be subtracted from num
+            while (num >= intCode[i]) {
+                // Append the corresponding Roman numeral to the result
+                ans.append(stringCode[i]);
+                // Subtract the value of the Roman numeral from num
+                num -= intCode[i];
+            }
+        }
+        
+        // Return the constructed Roman numeral as a string
+        return ans.toString();
+    }
+}

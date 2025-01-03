@@ -1,0 +1,55 @@
+/**
+ * Solution to the "Increasing Triplet Subsequence" problem.
+ * 
+ * Problem Statement:
+ * Given an integer array `nums`, return true if there exists a triple of indices 
+ * (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k]. If no such indices exist, 
+ * return false.
+ * 
+ * The solution uses a greedy approach to find the increasing triplet in O(n) time complexity.
+ * 
+ * Constraints:
+ * - 1 <= nums.length <= 5 * 10^5
+ * - -2^31 <= nums[i] <= 2^31 - 1
+ * 
+ * Example:
+ * Input: nums = [1, 2, 3, 4, 5]
+ * Output: true
+ * Explanation: There exists an increasing triplet (1, 2, 3).
+ */
+class Solution {
+
+    /**
+     * Determines if an increasing triplet subsequence exists in the array.
+     * 
+     * @param nums An array of integers.
+     * @return true if an increasing triplet exists, otherwise false.
+     */
+    public boolean increasingTriplet(int[] nums) {
+        // Variables to track the smallest and second smallest numbers
+        int i = Integer.MAX_VALUE; // Smallest value in the triplet
+        int j = Integer.MAX_VALUE; // Second smallest value in the triplet
+
+        // Edge case: If array has less than 3 elements, a triplet is not possible
+        if (nums.length < 3) {
+            return false;
+        }
+
+        // Iterate through the array to find the increasing triplet
+        for (int ind = 0; ind < nums.length; ind++) {
+            if (nums[ind] <= i) {
+                // Update the smallest value
+                i = nums[ind];
+            } else if (nums[ind] <= j) {
+                // Update the second smallest value
+                j = nums[ind];
+            } else {
+                // If we find a number larger than both i and j, triplet exists
+                return true;
+            }
+        }
+
+        // If no triplet is found, return false
+        return false;
+    }
+}

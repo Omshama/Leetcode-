@@ -1,0 +1,24 @@
+class Solution {
+    // Method to move all zeroes in the array to the end while maintaining the order of non-zero elements
+    public void moveZeroes(int[] nums) {
+        // Pointer to track the position to insert non-zero elements
+        int insertPos = 0;
+
+        // Iterate through the array
+        for (int i = 0; i < nums.length; i++) {
+            // If the current element is not zero
+            if (nums[i] != 0) {
+                // Place it at the insert position
+                nums[insertPos] = nums[i];
+                // Move the insert position forward
+                insertPos++;
+            }
+        }
+
+        // After all non-zero elements are moved, fill the rest of the array with zeroes
+        while (insertPos < nums.length) {
+            // Set the current position to zero
+            nums[insertPos++] = 0;
+        }
+    }
+}

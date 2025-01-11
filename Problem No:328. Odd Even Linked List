@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val; // The value of the node
+ *     ListNode next; // Pointer to the next node in the list
+ *     ListNode() {} // Default constructor
+ *     ListNode(int val) { this.val = val; } // Constructor to initialize value
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; } // Constructor to initialize value and next node
+ * }
+ */
+class Solution {
+    /**
+     * This function rearranges a singly-linked list by grouping all odd-indexed nodes 
+     * together followed by all even-indexed nodes, preserving their relative order.
+     * 
+     * @param head The head of the linked list.
+     * @return The head of the modified linked list.
+     */
+    public ListNode oddEvenList(ListNode head) {
+        // Edge case: If the list is empty or has only one node, no rearrangement is needed
+        if (head == null) {
+            return head;
+        }
+
+        // Initialize two pointers: one for odd nodes and one for even nodes
+        ListNode odd = head; // Points to the current odd node
+        ListNode even = head.next; // Points to the current even node
+        ListNode evenhead = even; // Keep the starting point of even nodes for later connection
+
+        // Iterate through the list to rearrange nodes
+        while (even != null && even.next != null) {
+            // Link the current odd node to the next odd node
+            odd.next = odd.next.next;
+            odd = odd.next; // Move the odd pointer to the next odd node
+
+            // Link the current even node to the next even node
+            even.next = even.next.next;
+            even = even.next; // Move the even pointer to the next even node
+        }
+
+        // Connect the last odd node to the head of the even nodes
+        odd.next = evenhead;
+
+        // Return the head of the modified list
+        return head;
+    }
+}

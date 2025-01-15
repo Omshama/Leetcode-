@@ -1,0 +1,39 @@
+class Solution {
+    public int compress(char[] chars) {
+        // Get the length of the input character array
+        int n = chars.length;
+        // Initialize an index to keep track of the position to write compressed characters
+        int idx = 0;
+
+        // Iterate through the character array
+        for (int i = 0; i < n; i++) {
+            char ch = chars[i]; // Store the current character
+            int count = 0; // Initialize a count for occurrences of the current character
+
+            // Count how many times the current character appears consecutively
+            while (i < n && chars[i] == ch) {
+                count++;
+                i++;
+            }
+
+            // If the character appears only once, write it directly to the array
+            if (count == 1) {
+                chars[idx++] = ch;
+            } else {
+                // If the character appears more than once, write the character and its count
+                chars[idx++] = ch; // Write the character
+
+                // Convert the count to a string and write each digit to the array
+                for (char digit : Integer.toString(count).toCharArray()) {
+                    chars[idx++] = digit;
+                }
+            }
+
+            // Decrement 'i' to adjust for the outer loop's increment
+            i--; 
+        }
+
+        // Return the new length of the compressed array
+        return idx;
+    }
+}

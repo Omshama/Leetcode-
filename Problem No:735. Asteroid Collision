@@ -1,0 +1,24 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        // Create a stack to process and resolve asteroid collisions
+        Stack<Integer> stack = new Stack<>();
+
+        // Iterate through each asteroid in the input array
+        for (int i = 0; i < asteroids.length; i++) {
+            // If the stack is empty or the current asteroid is moving right (positive),
+            // simply push it onto the stack
+            if (stack.isEmpty() || asteroids[i] > 0) {
+                stack.push(asteroids[i]);
+            } else {
+                // Handle collisions for a left-moving asteroid (negative value)
+                while (!stack.isEmpty()) {
+                    int top = stack.peek(); // Peek the top of the stack
+                    
+                    // If the top of the stack is also moving left (negative),
+                    // no collision occurs, so push the current asteroid and exit the loop
+                    if (top < 0) {
+                        stack.push(asteroids[i]);
+                        break;
+                    }
+
+                    int modVal = Math.abs(asteroids[i]); // Get the absolute value
